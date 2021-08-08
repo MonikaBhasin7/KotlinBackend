@@ -33,15 +33,16 @@ fun Application.module(testing: Boolean = false) {
         get("/") {
             call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
         }
-
-        get("/session/increment") {
-            val session = call.sessions.get<MySession>() ?: MySession()
-            call.sessions.set(session.copy(count = session.count + 1))
-            call.respondText("Counter is ${session.count}. Refresh to increment.")
-        }
-
-        get("/json/gson") {
-            call.respond(mapOf("hello" to "world"))
+        route("/monika") {
+            //localhost:8080/monika
+            post {
+                val body = call.receive<String>()
+                call.respond("body")
+            }
+            get("/{id}") {
+                val id = call.parameters["id"]
+                call.respond("$id")
+            }
         }
     }
 }
