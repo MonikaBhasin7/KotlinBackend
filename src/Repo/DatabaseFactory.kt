@@ -11,9 +11,10 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
 
+    lateinit var db: Database
 
     fun init() {
-        Database.connect(hikari()) // 1
+        db = Database.connect(hikari()) // 1
 
         // 2
         transaction {
@@ -22,7 +23,7 @@ object DatabaseFactory {
         }
     }
 
-    private fun hikari(): HikariDataSource {
+    fun hikari(): HikariDataSource {
         val config = HikariConfig()
         //getting the env variables which we have created.
         config.driverClassName = System.getenv("JDBC_DRIVER") // 1
