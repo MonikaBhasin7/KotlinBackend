@@ -8,18 +8,23 @@ import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.PreparedStatement
 
 object DatabaseFactory {
 
     lateinit var db: Database
 
-    fun init() {
-        db = Database.connect(hikari()) // 1
-
-        // 2
-        transaction {
-            SchemaUtils.create(City_Table)
-//            SchemaUtils.create(Todos)
+    fun init(): Database {
+        if(::db.isInitialized) {
+            return db
+        } else {
+            db = Database.connect(hikari())
+            transaction {
+                SchemaUtils.create(City_Table)
+            }
+            return db
         }
     }
 
@@ -49,4 +54,12 @@ object DatabaseFactory {
                 lambda()
             }
         }
+
+    fun getConnection(): Connection {
+        return DriverManager.getConnection(System.getenv("DATABASE_URL"))
+    }
+
+    fun prepareStatement(conn: Connection, query: String): PreparedStatement {
+        return conn.prepareStatement(query)
+    }
 }
