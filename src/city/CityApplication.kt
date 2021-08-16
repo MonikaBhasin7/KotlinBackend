@@ -1,21 +1,8 @@
 package com.example
 
-import com.example.Repo.DatabaseFactory.dbQuery
-import com.example.city.City_Table
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
-import io.ktor.http.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.transactions.TransactionManager
-import org.jetbrains.exposed.sql.transactions.transaction
 
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads

@@ -1,24 +1,15 @@
 package com.example
 
-import com.example.Repo.DatabaseFactory
+import com.example.base.DatabaseFactory
 import com.example.city.City
-import com.example.city.City_Table
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.request.*
 import io.ktor.routing.*
 import io.ktor.http.*
-import io.ktor.sessions.*
-import io.ktor.auth.*
 import io.ktor.gson.*
 import io.ktor.features.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.transactions.TransactionManager
-import org.jetbrains.exposed.sql.transactions.transaction
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
@@ -38,10 +29,10 @@ fun Application.module(testing: Boolean = false) {
 //    install(Authentication) {
 //    }
 //
-//    install(ContentNegotiation) {
-//        gson {
-//        }
-//    }
+    install(ContentNegotiation) {
+        gson {
+        }
+    }
 //
 //    routing {
 //        get("/") {
@@ -64,14 +55,14 @@ fun Application.module(testing: Boolean = false) {
 //        getNews()
 //    }
 
-    DatabaseFactory.init()
-    install(ContentNegotiation) {
-        gson {  }
-    }
-
-    routing {
-        aboutCity()
-    }
+//    DatabaseFactory.init()
+//    install(ContentNegotiation) {
+//        gson {  }
+//    }
+//
+//    routing {
+//        aboutCity()
+//    }
 }
 
 fun Route.aboutCity(): Route {

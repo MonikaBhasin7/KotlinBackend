@@ -1,6 +1,7 @@
-package com.example.Repo
+package com.example.base
 
 import com.example.city.City_Table
+import com.example.orderManagement.Product_Table
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
@@ -16,15 +17,22 @@ object DatabaseFactory {
 
     lateinit var db: Database
 
-    fun init(): Database {
-        if(::db.isInitialized) {
-            return db
-        } else {
-            db = Database.connect(hikari())
-            transaction {
-                SchemaUtils.create(City_Table)
-            }
-            return db
+    fun init() {
+//        if(DatabaseFactory::db.isInitialized) {
+//            return db
+//        } else {
+//            db = Database.connect(hikari())
+//            transaction {
+//                SchemaUtils.create(City_Table)
+//                SchemaUtils.create(Product_Table)
+//            }
+//            return db
+//        }
+        Database.connect(hikari())
+        transaction {
+
+            SchemaUtils.create(City_Table)
+            SchemaUtils.create(Product_Table)
         }
     }
 
