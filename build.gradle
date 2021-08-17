@@ -44,5 +44,7 @@ dependencies {
     compile "org.jetbrains.exposed:exposed-jdbc:$exposed_version"
     compile "org.postgresql:postgresql:$postgres_version"
     compile "com.zaxxer:HikariCP:$hikaricp_version"
+    implementation("io.ktor:ktor-freemarker:$ktor_version")
+
 
 }

@@ -70,8 +70,22 @@ fun Route.getProduct() : Route {
     return route
 }
 fun Route.getAllProducts() : Route {
-    val route = route("/addProduct") {
-
+    val route = route("/getAllProducts") {
+        get {
+            productRepoImpl.getAllProducts().let {
+                when(it) {
+                    is Response.SuccessWithMessage -> {
+                        call.respond(it.httpStatusCode, it.message)
+                    }
+                    is Response.SuccessWithData -> {
+                        call.respond(it.httpStatusCode, it.data)
+                    }
+                    is Response.ErrorWithMessage -> {
+                        call.respond(it.httpStatusCode, it.message)
+                    }
+                }
+            }
+        }
     }
     return route
 }

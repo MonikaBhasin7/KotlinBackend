@@ -6,4 +6,5 @@ import com.example.orderManagement.Product
 interface ProductRepo {
 
     fun addProduct(productPayload: Product): Response
+    fun getAllProducts(): Response
 }

@@ -15,11 +15,11 @@ object Product_Table : Table("product_table") {
 
 data class Product(
     val productId:Long? = null,
-    val productTypeId:Long? = null,
-    val productName:String? = null,
-    val quantity:Int? = null,
-    val productPrice:Int? = null,
-    val productCost:Int? = null
+    var productTypeId:Long? = null,
+    var productName:String? = null,
+    var quantity:Int? = null,
+    var productPrice:Int? = null,
+    var productCost:Int? = null
 ): Principal {
     fun checkAllFields(): String {
         if(productTypeId == null) return "Product Type Id is empty"
