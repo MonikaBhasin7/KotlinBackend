@@ -49,8 +49,8 @@ fun Route.addProduct() : Route {
                             is Response.SuccessWithMessage -> {
                                 call.respond(it.httpStatusCode, it.message)
                             }
-                            is Response.SuccessWithData<*> -> {
-                                call.respond(it.httpStatusCode, it.data as Product)
+                            is Response.SuccessWithData -> {
+                                call.respond(it.httpStatusCode, it.data)
                             }
                             is Response.ErrorWithMessage -> {
                                 call.respond(it.httpStatusCode, it.message)

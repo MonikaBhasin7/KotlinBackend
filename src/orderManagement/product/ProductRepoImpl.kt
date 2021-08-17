@@ -1,5 +1,6 @@
 package com.example.orderManagement.product
 
+import com.example.base.BaseResponse
 import com.example.base.DatabaseFactory
 import com.example.base.Response
 import com.example.orderManagement.Product
@@ -19,7 +20,7 @@ class ProductRepoImpl(): ProductRepo {
             }
             preparedStatement.executeUpdate()
             close()
-            return Response.SuccessWithMessage("Data Inserted Successfully", HttpStatusCode.OK)
+            return Response.SuccessWithData(BaseResponse("Done","Data Inserted Successfully"), HttpStatusCode.OK)
         }
     }
 
